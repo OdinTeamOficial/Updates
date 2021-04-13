@@ -1,8 +1,10 @@
 Config = {}
-Config.tempo = 60 																		-- Tempo para aparecer incêndios (Em segundos)
+Config.tempo = 3 																		-- Tempo para aparecer incêndios (Em segundos)
 Config.permissao = false																-- Permissão para receber incêndios (coloque false caso não queira)
-Config.valormin = 5 																	-- Valor variante para receber por cada incêndio (Caso queira deixar um valor único não variavel deixe em false) e descomente a linha abaixo
-Config.valormax = 100
+Config.dinheiroitem = true                                                              -- Deixe em true para dar um dinheiro como recebimento de pagamento do serviço
+Config.nomeitemdinheiro = "dinheirosujo"                                                -- Nome do item caso a opção acima estema em true.
+Config.valor = 5 																	    -- Valor variante para receber por cada incêndio (Caso queira deixar um valor único não variavel deixe em false) e descomente a linha abaixo
+Config.valormax = 100                                                                   -- Valor maximo
 --Config.valor2 = 500 																	-- Valor único para receber caso a linha acima esteja em false
 Config.coordenadaservico = {198.05813598633,-1646.4128417969,29.803216934204} 			--Coordenada para entrar em serviço
 Config.coordenadapegarveiculo = {209.71908569336,-1640.3033447266,29.796363830566}      --Coordenada para pegar veiculo
@@ -10,6 +12,7 @@ Config.coordenadaspawnveiculo = {219.81762695313,-1640.7578125,29.517517089844,3
 Config.veiculo = "firetruk"                                                             --Nome de Spawn do veiculo
 Config.extintor = true                                                                  --Receber Extintor
 Config.roupa = true                                                                     --Colocar roupa
+Config.useparticle = true
 
 Config.Roupabombeiro = { -- https://wiki.rage.mp/index.php?title=Clothes
 	["Bombeiro"] = {
@@ -60,10 +63,14 @@ Config.naotempermissao = "Você não possui permissão"									--Texto caso a p
 Config.textocaminhao = "~r~PRESSIONE  ~g~E~r~ PARA PEGAR O CAMINHÃO"				    --Texto do local onde pega caminhão
 Config.cortextocaminhao = 255,255,255,150												--Cor do texto de expediente e caminhão (r,g,b,a)
 Config.textoescalacaminhao = 0.35														--Escala do texto de expediente e caminhão
+Config.fonttextocaminhao = 1                                                            --Tipo de fonte do texto
+Config.escalatextocaminhao = 0.35                                                       --Escala do texto
 
 Config.textoexpediente = "~r~PRESSIONE  ~g~E~r~ PARA INICIAR SERVIÇO"				    --Texto do local onde inicia expediente
 Config.cortextoexpediente = 255,255,255,150												--Cor do texto de expediente e caminhão (r,g,b,a)
 Config.textoescalaexpediente = 0.35														--Escala do texto de expediente e caminhão
+Config.fontexpediente = 1																--Fonte do escrito
+Config.escalaexpediente = 0.35                                                          --Escala do texto
 
 Config.textodechamada = "Um novo foco de incêndio foi detectado! Veja no GPS"			--Texto ao receber chamado
 Config.cordotextodechamada = {255,70,50}												--Cor do texto de chamado (r,g,b)
