@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background-color: transparent;
+}
+
+#passemenu{
+	width: 70%;
+	height: 580px;
+	background-color: #000;
+	background-image: url("images/BK.png");
+	background-repeat: no-repeat;
+	background-size: 1100px;
+	background-position: center;
+	border-radius: 10px;
+	opacity: .9;
+	position: relative;
+	background-size: cover;
+}
+
+.progresso{
+	width: 100%;
+	height: 20px;
+	background-color: rgb(224, 224, 224);
+	border-radius: 5px;
+	position:absolute;
+    bottom:0; 
+	
+	
+}
+.barra-progresso{
+	background-color: rgb(0, 153, 255);
+	height: 100%;
+	vertical-align: auto;
+	color: white;
+	font-weight: bold;
+	position: relative;
+	text-align: center;
+	border-radius: 0 0 5px 5px;
+}
+
+.barra-progresso span{
+	margin-left: 15px;
+	
+}
+
+#tempopasse{
+	float: right;
+	color: #FFFFFF;
+	font-size: 25px;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	font-weight: bold;
+	margin-right: 30px;
+}
+
+#tempopasse #tempo{
+	color: #54EA20;
+}
+
+#info{
+	color: #FFFFFF;
+	margin-top: 18%;
+	width: 100%;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#info #sobre{
+	width: 70px;
+	height: 100%;
+	margin-top: -100px;
+	margin-left: 100px;
+	background-color: #000000;
+	border-radius: 20px;
+	opacity: .88;
+	text-align: left;
+}
+
+#info #verpasse{
+	margin-top: 20px;
+}
+#itens{
+	
+	height: 215px;
+	
+}
+
+#itens #seusampapass{
+	color: #FFFFFF;
+	font-size: 25px;
+	font-weight: bold;
+	margin-top: 30px;
+}
+#itens #seusampapass span{
+	width: 220px;;
+	height: auto;
+	background-color: #247afa;
+	border-radius: 15px;	
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+	
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 3px solid #FFFFFF;
+}
+.separator::before {
+    margin-right: .25em;
+	
+}
+.separator::after {
+    margin-left: .25em;
+	
+}
+
+#passitens{
+	width: 90%;
+	height: auto;
+	margin-top: -7%;
+	
+}
+
+.card-pass{
+	margin-right: 10px;
+	border-radius: 10px;
+	height: 170px;
+	width: auto;
+	position: relative;
+	color: #ffc400;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-origin:padding-box;	
+}
+
+
+
+
+.textoniveis{
+	margin-top: 5px;
+	font-size: 15px;
+	height: 25px;
+	width: 25px;
+	color: black;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	float: left;
+	margin-left: 5px;
+	border-radius: 100%;
+	background-color: #00b7ff;
+	background-position: center;
+	text-align: center;
+}
