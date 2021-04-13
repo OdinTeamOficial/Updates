@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'OdinTeam'
 contact 'Discord: https://discord.gg/p9vq7U2qTe'
-version '2.3'
+version '2.4'
 
 
 client_scripts {
