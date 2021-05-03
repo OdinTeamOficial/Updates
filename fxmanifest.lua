@@ -5,7 +5,7 @@ ui_page "nui/index.html"
 
 author 'Odin Team'
 
-version '5.0'
+version '5.1'
 
 client_scripts {
 	"@vrp/lib/utils.lua",
