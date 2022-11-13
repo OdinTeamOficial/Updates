@@ -1,5 +1,4 @@
--- NOTE: You can potentially pre-furnish house models using this.
--- If you don't know/cant figure it out, don't ask how.
+-- HELLO GALERAS
 ShellExtras = {
   HotelV1 = {
     [GetHashKey("v_49_motelmp_winframe")]       = {offset = vector3(1.44,-3.9, 2.419)},
