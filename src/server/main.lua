@@ -32,6 +32,18 @@ vRP._prepare("creative/set_ipva","UPDATE vrp_user_vehicles SET ipva = @ipva WHER
 
 local vehicle_players = {}
 
+
+Citizen.CreateThread(function()
+  local return_validation = pcall(CheckValidation)
+  local return_version = pcall(checkversion)
+
+  if not return_validation or not returnversion then
+    print("^8[^3"..GetCurrentResourceName().."^8] ^1 Erro Ao tentar executar as funcoes! ^1Entre em contato no discord: ^8discord.gg/p9vq7U2qTe^0")
+    desligar_servidor()
+  end
+
+end)
+
   --local curInDb = SqlFetch('SELECT * FROM '..((Config and Config.AllhousingTable) or "allhousing"),{})
 
 GetOutfits = function(source)
