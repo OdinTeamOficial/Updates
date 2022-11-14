@@ -2,7 +2,7 @@ fx_version 'adamant'
 games { 'rdr3', 'gta5' }
 
 mod 'furni'
-version '1.0.2'
+version '1.0'
 
 ui_page 'nui/furniture.html'
 
@@ -17,7 +17,7 @@ client_scripts {
 server_scripts {
   "@vrp/lib/utils.lua",
   '@mysql-async/lib/MySQL.lua',
-
+  'checkversion.lua',
   'config.lua',
   'src/utils.lua',
   'src/server/main.lua',
