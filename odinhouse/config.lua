@@ -1,7 +1,7 @@
 Config = {
   Linguagem      = 'pt',                                  -- Linguagem a ser utilizada 
   Debug       = false,                                    -- Não mexer
-  Command_create = "vali1234",                            -- Comando para criar casas
+  Command_create = "criarcasa",                            -- Comando para criar casas
   Command_delete = "delhouse",                            -- Comando para deletar casas
 
   PermitirVendaDeCasas = true,                            -- Permitir players vender casa
