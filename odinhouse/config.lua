@@ -1,92 +1,56 @@
 Config = {
-  Linguagem      = 'pt',
-  Debug       = false,
+  Linguagem      = 'pt',                                  -- Linguagem a ser utilizada 
+  Debug       = false,                                    -- Não mexer
 
-  Max_Homes = 2,
-  Command_create = "vali1234",
-  Command_delete = "delhouse",
+                                                          -- Max_Homes = 2,
+  Command_create = "vali1234",                            -- Comando para criar casas
+  Command_delete = "delhouse",                            -- Comando para deletar casas
 
-  PermitirVendaDeCasas = true,              -- os jogadores podem vender sua casa após a compra?
-  SpawnOffset     = vector3(0.0,0.0,0.0),   -- deslocamento global de desova da casa (local + SpawnOffset) (use valor z negativo para diminuir a posição dos projéteis)
-                                            -- note: if you already have houses spawned, I wouldn't go changing this. Will result in furniture dissappearing.
+  PermitirVendaDeCasas = true,                            -- Permitir players vender casa
+  SpawnOffset     = vector3(0.0,0.0,0.0),                 -- Offset de spawn 
 
-  WaitToRender      = true, -- might help reduce MS when you have lots of houses
-  WaitToRenderTime  = 2000, -- time to sleep between distance checks (if WaitToRender is true)
-  SaveVehicleBody = true,
-  SaveVehicleFuel = true,
-  SaveVehicleEngine = true,
-
-  -- FRAMEWORK
-  
-  UsarVSync        = true,   -- Really only applies if you're using the modified vSync provided, else set false.
-
-
- 
-  UsingNativeUI     = true,
-  UsarInventarioNasCasas = true, -- if using the inventory inside of houses.
-
-
-
-
-  -- BLIPS/MARKERS/3DTEXT
-  UsarHelpText       = true,  -- se estiver usando HelpText (em vez de 3DText).
-  Usar3DText         = true,   -- se estiver usando 3DText (em vez de HelpText).
-  UsarMarkers        = true,  -- se você quiser marcadores.
-  UsarBlips          = true,   -- se você quiser blips.
-
-  -- TORNAR DISTÂNCIA
-  MarkerDistance    = 10.0,
-  TextDistance3D    = 10.0,
-  HelpTextDistance  = 2.0,
-  InteractDistance  = 2.0,  
-
-  -- Permitir que os donos da casa movam sua garagem?
-  MovimentoDaGaragem = true,
-
-
-  
-
-
-  -- BLIP COLORS/SPRITES
-  UsarSpritePorZona    = true,  -- if you want to set the blip sprite by zone.
-  UsarCorPorZona   = true,  -- if you want to set the blip color by zone.
-
-  CorBlipCasaVazia      = 1,     -- must be set regardless of option above.
-  CorBlipDonoCasa      = 2,     -- must be set regardless of option above.
-  CorBlipCasaComprada      = 3,     -- must be set regardless of option above.
-  CorBlipZona      = {      -- set house blip colors based on zone. Optional.
-    [9] = {
-      CorCasaVaziaZona  = 1,
-      CorDonoZoa  = 2,
-      CorCasaCompradaZona  = 3,
+  WaitToRender      = true,                               -- Esperar renderizar interior 
+  WaitToRenderTime  = 2000,                               -- Tempo de espera para renderizar
+  SaveVehicleBody = true,                                 -- Salvar dano da carcaça do veiculo
+  SaveVehicleFuel = true,                                 -- Salvar combustivel do veiculo
+  SaveVehicleEngine = true,                               -- Savar dano do motor do veiculo 
+  UsarVSync        = true,                                -- Usando vsync
+  UsingNativeUI     = true,                               -- Não mexer
+  UsarInventarioNasCasas = true,                          -- Permitir inventario nas casas
+  UsarHelpText       = true,                              -- Usar heelp text
+  Usar3DText         = true,                              -- Usar 3d text
+  UsarMarkers        = true,                              -- Usar markers
+  UsarBlips          = true,                              -- Usar blips
+  MarkerDistance    = 10.0,                               -- Distancia do marker
+  TextDistance3D    = 10.0,                               -- Distancia 3d text 
+  HelpTextDistance  = 2.0,                                -- Distancia heelp text
+  InteractDistance  = 2.0,                                -- Distancia da interação
+  MovimentoDaGaragem = true,                              -- Permitir player mover garagem
+  UsarSpritePorZona    = true,                            -- Mudar blip por zona
+  UsarCorPorZona   = true,                                -- Mudar cor por zona
+  CorBlipCasaVazia      = 1,                              -- Cor do blip de casas vazias
+  CorBlipDonoCasa      = 2,                               -- Cor do blip do dono da casa
+  CorBlipCasaComprada      = 3,                           -- Cor do blip de outras casas
+  CorBlipZona      = {                                    -- Cor blip por zona
+    [9] = {                                               -- Entre [] fica o id da casa a ter configuração diferente
+      CorCasaVaziaZona  = 1,                              --Cor do blip da casa
+      CorDonoZoa  = 2,                                    -- Cor do blip dono da casa
+      CorCasaCompradaZona  = 3,                           -- Cor do blip de outras casas
     }, 
-    [205] = {      
-      CorCasaVaziaZona  = 1,
-      CorDonoZoa  = 2,
-      CorCasaCompradaZona  = 3,
-    }
   },
-
-  BlipCasaVazia   = 350,    -- must be set regardless of option above.
-  BlipDonoCasa   = 40,     -- must be set regardless of option above.
-  BlipCasaComprada   = 357,    -- must be set regardless of option above.
-  BlipPorZona   = {       -- set house blip colors sprites on zone. Optional.
-    [9] = {
-      BlipCasaVaziaZona  = 350,
-      BlipDonoZona  = 40,
-      BlipCasaCompradaZona  = 357,
+  BlipCasaVazia   = 350,                                  -- Tipo de blip casa vazia
+  BlipDonoCasa   = 40,                                    -- Tipo de blip dono da casa
+  BlipCasaComprada   = 357,                               -- Tipo de blip de outras casas
+  BlipPorZona   = {                                       -- Blip por zona
+    [9] = {                                               -- Entre [] fica o id da casa a ter configuração diferente
+      BlipCasaVaziaZona  = 350,                           -- Tipo de blip casa vazia
+      BlipDonoZona  = 40,                                 -- Tipo de blip dono da casa 
+      BlipCasaCompradaZona  = 357,                        -- Tipo de blip outras casas 
     }, 
-    [205] = {      
-      BlipCasaVaziaZona  = 350,
-      BlipDonoZona  = 40,
-      BlipCasaCompradaZona  = 357,
-    }
   },
-
-  -- Marker colors and text color.
-  TipoMarker = 1,
-  CorMarkers = {
-    [1] = {r = 0, g = 255, b = 0, a = 155},
+  TipoMarker = 1,                                        -- Tipo de marker geral
+  CorMarkers = {                                         -- Cor marker diferentes
+    [1] = {r = 0, g = 255, b = 0, a = 155},              -- Entre [] fica o id da casa a ter configuração diferente e então, muda-se a cor a partir do código RGBA
     [2] = {r = 255, g = 0, b = 0, a = 155},
     [3] = {r = 0, g = 0, b = 0, a = 155},
     [4] = {r = 0, g = 0, b = 255, a = 155},
@@ -94,7 +58,7 @@ Config = {
     [6] = {r = 0, g = 255, b = 255, a = 155},
     [7] = {r = 255, g = 255, b = 255, a = 155},
   },
-  CorTextos = {
+  CorTextos = {                                          -- Não Mexer
     [1] = "~g~",
     [2] = "~r~",
     [3] = "~b~",
@@ -103,43 +67,30 @@ Config = {
     [6] = "~y~",
     [7] = "~w~",
   },
-
-  Controles = {
-    Interagir  = 38, -- Access most things.
-    Aceitar    = 58, -- Accept/validate decision.
-    Cancelar    = 49, -- Cancel/discard deicsion.
-    Furni     = 49, -- Furni UI.
+  Controles = {                                          -- Id controles para cada interação 
+    Interagir  = 38,  
+    Aceitar    = 58, 
+    Cancelar    = 49,
+    Furni     = 49,
   },
-
-  espacobau = 1000,
-  EsconderBlipsCasaComprada    = false,    -- hide blips for players owned houses?
-  EsconderBlipsCasaOutros   = false,    -- hide blips for other player houses?
-  EsconderBlipsCasaVazia  = false,    -- hide blips for empty houses/for sale houses?
-
-  -- OWNER STUFF  
-  RemoverMoveis  = true,  -- Remove all furniture on sale.
-  DevolverDinMoveis  = true,  -- Only if RemoverMoveis enabled.
-  PorcentagemDevolucao    = 50,    -- percent of price to refund for furniture.
-
-  -- THEFT STUFF
-  RouboDeCasas                = true,         -- can the player break into the house?
-  RoubodeGaragem               = true,         -- can the player break into garage?
-  GuardarVeiculosOutrosPlayers = true,        -- can players store other player vehicles at their house?
-  PrecisaDeLockpick          = true,         -- does the player require a lockpick item to attempt to break in (garage AND house)?
-  LockpickItem              = "lockpick",   -- lockpick item name.
-  QuebrarLockpickFalha       = true,         -- does the lockpick break if the minigame is failed?
-  ChanceDeFalhar        = 50,            -- % failure chance, if not using minigames for lockpicking.
-  TempoLockpick              = 3,            -- seconds to lockpick, if not using minigames for lockpicking.
-  PermiAdmin = "admin.permissao",
-  PermiPolicia = "policia.permissao",
-
-  -- List a job like the example below to allow creation of houses.
-
-
-  PoliciaisPodemEntrar     = true, -- Can houses be raided by jobs listed below?
-  PoliciaAcessarInv  = true, -- Can police raid the inventory of all houses?
-  -- These jobs also receive all notifications regarding police
-
+  EsconderBlipsCasaComprada    = false,                  -- Esconder blip de casas compradas 
+  EsconderBlipsCasaOutros   = false,                     -- Esconder blip de casa de outros players 
+  EsconderBlipsCasaVazia  = false,                       -- Esconder blip de casas vazias
+  RemoverMoveis  = true,                                 -- Remover moveis na venda
+  DevolverDinMoveis  = true,                             -- Devonver dinheiro do movel ao vender 
+  PorcentagemDevolucao    = 50,                          -- Porcentagem de devolução do dinheiro dos moveis 
+  RouboDeCasas                = true,                    -- Permitir roubo de casas 
+  RoubodeGaragem               = true,                   -- Permitir roubo de garagens 
+  GuardarVeiculosOutrosPlayers = true,                   -- Permitir guardar veiculo de outros players
+  PrecisaDeLockpick          = true,                     -- Usar lockpick
+  LockpickItem              = "lockpick",                -- Item lockpick
+  QuebrarLockpickFalha       = true,                     -- Quebrar lockpick ao falhar
+  ChanceDeFalhar        = 50,                            -- Chance de falhar
+  TempoLockpick              = 3,                        -- Tempo para roubar 
+  PermiAdmin = "admin.permissao",                        -- Permissão de admin
+  PermiPolicia = "policia.permissao",                    -- Permissão de policias
+  PoliciaisPodemEntrar     = true,                       -- Permitir policiais entrar em casas 
+  PoliciaAcessarInv  = true,                             -- Permitir policiais acessar inventario
 }
 
-mLibs = exports["meta_libs"]
+mLibs = exports["meta_libs"]                             -- Não mexer 
