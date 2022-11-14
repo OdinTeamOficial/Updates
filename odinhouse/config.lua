@@ -1,8 +1,6 @@
 Config = {
   Linguagem      = 'pt',                                  -- Linguagem a ser utilizada 
   Debug       = false,                                    -- Não mexer
-
-                                                          -- Max_Homes = 2,
   Command_create = "vali1234",                            -- Comando para criar casas
   Command_delete = "delhouse",                            -- Comando para deletar casas
 
