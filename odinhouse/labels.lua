@@ -85,7 +85,7 @@ local labels = {
     ['UpgradeShell']        = "Atualizar Interior",
     ['SellHouse']           = "Vender casa",
     ['FurniUI']             = "Catálogo de móveis",
-    W         = "Setar Guarda-roupa",
+
     ['SetInventory']        = "Setar Inventário",
     ['SetGarage']           = "Setar Garagem",
     ['LockDoor']            = "Trancar casa",
@@ -150,6 +150,10 @@ local labels = {
     ['SpawnVehicle']   = "Spawnar Veiculo",
     ['NotExitVehicle']   = "Você ja tem um veiculo desse fora da garagem",
     ['LongPlayer']   = "Voce esta muito longe da entrada",
+    ['AnyTry']   = "~b~[OdinHouse] ~r~Espere alguns segundos, você está comprando muitas casas!",
+    ['HouseLimit']   = "~b~[OdinHouse] ~r~Você só pode ter %d casas!",
+
+    
     
 
 
