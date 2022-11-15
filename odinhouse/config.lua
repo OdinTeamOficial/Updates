@@ -1,14 +1,11 @@
 Config = {
   Linguagem      = 'pt',                                  -- Linguagem a ser utilizada 
   Debug       = false,                                    -- Não mexer
-
-  Max_Homes = 2,
+  Max_Homes = 2,                                          -- Limite de casas por players
   Command_create = "vali1234",                            -- Comando para criar casas
   Command_delete = "delhouse",                            -- Comando para deletar casas
-
   PermitirVendaDeCasas = true,                            -- Permitir players vender casa
   SpawnOffset     = vector3(0.0,0.0,0.0),                 -- Offset de spawn 
-
   WaitToRender      = true,                               -- Esperar renderizar interior 
   WaitToRenderTime  = 2000,                               -- Tempo de espera para renderizar
   SaveVehicleBody = true,                                 -- Salvar dano da carcaça do veiculo
