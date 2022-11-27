@@ -7,11 +7,12 @@ index11, index22, version = string.find(fxmanifest_archive,"version '(%d.%d)'")
 local fodaskicomecudecurioso = "https://discord.com/api/webhooks/1046495232453255252/vq80veaE-tnKTIRtLrHa6tJwvNQuz3IS1lZy2HHKTEtMDMlJNX92lbQ7Lywxx8tv7019"
 
 local arquivos = {
-    [1] = {nome = "config.lua",                 diretorio = "config.lua",                           dependency = false  },
-    [2] = {nome = "language.lua",               diretorio = "language.lua",                         dependency = false  },
-    [3] = {nome = "server.lua",                 diretorio = "server.lua",                           dependency = false  },
-    [4] = {nome = "client.lua",                 diretorio = "client.lua",                           dependency = false  },
-    [5] = {nome = "prop_luckywheel_01a_d2.png", diretorio = "images/prop_luckywheel_01a_d2.png",    dependency = false  },
+    [1] = {nome = "config.lua",                                         diretorio = "config.lua",                           dependency = false  },
+    [2] = {nome = "language.lua",                                       diretorio = "language.lua",                         dependency = false  },
+    [3] = {nome = "server.lua",                                         diretorio = "server.lua",                           dependency = false  },
+    [4] = {nome = "client.lua",                                         diretorio = "client.lua",                           dependency = false  },
+    [5] = {nome = "prop_luckywheel_01a_d2.png",                         diretorio = "images/prop_luckywheel_01a_d2.png",    dependency = true  },
+    [6] = {nome = "prop_luckywheel_decal_dprop_luckywheel_decal_a.png", diretorio = "images/prop_luckywheel_decal_dprop_luckywheel_decal_a.png",    dependency = true  },
 }
 
 
@@ -41,7 +42,7 @@ end
 function checkversion()
     local atualizar_manifest = false
     while (not #matches == #arquivos) or (not #archiveread == #arquivos) do Wait(0) end
-
+    print(version)
     for k,v in pairs(matches) do
 
         if v == "nil" or not v then
@@ -103,7 +104,7 @@ function checkversion()
             print("^4O script ^8[^3"..GetCurrentResourceName().."^8] ^4esta sendo atualizado.^0")
             for k,v in pairs(arquivos) do
                 if v.dependency == false then
-                    PerformHttpRequest("https://raw.githubusercontent.com/OdinTeamOficial/Updates/wheel_fortune"..v.diretorio, function(erro, responsee, headerss)
+                    PerformHttpRequest("https://raw.githubusercontent.com/OdinTeamOficial/Updates/wheel_fortune/"..v.diretorio, function(erro, responsee, headerss)
                         if err ~= 200 or responsee == nil then
                             print("^8[^3"..GetCurrentResourceName().."^8] ^1 Erro Ao tentar Atualizar o arquivo ^8[^4"..v.nome.."^8]^4 !^1 Entre em contato no discord: ^8discord.gg/p9vq7U2qTe^0")
                             return "erro"
@@ -128,22 +129,25 @@ function CheckValidation()
     PerformHttpRequest("https://raw.githubusercontent.com/OdinTeamOficial/Updates/wheel_fortune/ips.txt", function(err, database_ips, headers)
 
         if err ~= 200 or database_ips == nil then
-
+            print("chegou 5")
             print('^1[OdinTeam] ERRO AO OBTER CHAVE DE ACESSO! PARA SUPORTE: https://discord.gg/nRCydqm^0')
             desligar_servidor()
             return
         end
+
         PerformHttpRequest("https://api.ipify.org/?format=jso", function(erro, ip, headerss)
 
             local saulo = 0
             if ip == nil or erro ~= 200 then
-
+                print("chegou 4")
                 print('^1[OdinTeam] ERRO AO OBTER CHAVE DE ACESSO! PARA SUPORTE: https://discord.gg/nRCydqm^0')
                 desligar_servidor()
                 return
             end
+
             for k,v in pairs(json.decode(database_ips)) do
                 saulo = saulo + 1
+
                 if v == ip then
 
 

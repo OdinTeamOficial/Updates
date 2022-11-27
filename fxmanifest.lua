@@ -1,7 +1,7 @@
 fx_version 'adamant'
 game 'gta5'
 description 'Wheel_fortune'
-version '1.5.3'
+version '1.0'
 
 
 server_scripts {
