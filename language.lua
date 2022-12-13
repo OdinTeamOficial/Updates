@@ -1,6 +1,6 @@
 Language = {
 	['pt'] = {
-		['spin_wheel'] = 'Pressione ~INPUT_CONTEXT~ para rodar a roleta',
+		['spin_wheel'] = 'Pressione E para rodar a roleta',
 		['already_spin'] = 'Voce ja roletou hoje, volte em %d:%d:%d',
 		['you_won_car'] = 'Parabéns, voce ganhou o carro: [%d]X - %s',
 		['you_won_item'] = 'Parabéns, voce ganhou o item: [%d]X - %s',

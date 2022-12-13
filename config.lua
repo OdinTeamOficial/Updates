@@ -2,16 +2,23 @@ Config	= {}
 
 Config.Locale = 'pt'  																		-- LINGUAGEM DO SCRIPT
 
-Config.framework = "VRPEX" 																	-- FRAMEWORK A SER UTILIZADA (VRPEX OU CREATIVE)
+Config.framework = "CREATIVE" 																-- FRAMEWORK A SER UTILIZADA (VRPEX OU CREATIVE)
+
+Config.table_users = "summerz_characters"                                                   --ONDE SERÁ CRIADO A COLUNA ROLETA NA DATABASE
+Config.table_users_fields = {"id"}															--NOME DO FIELD DO ID DO PLAYER, PODE SER ID OU USER_ID, DEPENDENDO DA SUA BASE
+
+Config.table_vehicles = "summerz_vehicles"													--NOME DA TABELA DE VEICULOS DA DATABASE
+Config.table_vehicle_fields = {"user_id","vehicle","tax","plate"}							--ITENS DA TABELA DE VEICULOS, MÁXIMO DE 4 ITENS
+
+Config.helptext = 2																			--TIPO DE HELP TEXT A SER UTILIZADO QUANDO CHEGAR PERTO DA ROLETA
 
 Config.substituirIMG = true 																-- SUBSTITUIR IMAGEM DA ROLETA
-
 Config.firework = true																		-- SOLTAR PARTICULAS DE FOGOS
 Config.offsetFirework = vec3(0.0,0.0,1.0)													-- OFFSET DOS FOGOS DE ARTIFICIO A PARTIR DA ROLETA
 Config.FireworkAsset = {"proj_indep_firework_v2","scr_firework_indep_spiral_burst_rwb"}		-- ASSETS DA PARTICULA https://vespura.com/fivem/particle-list/
 
 Config.OnlyVip = false																		-- ROLETAR SOMENTE QUEM TIVER A PERMISSÃO
-Config.VipPerm = "vip.permissao"															-- PERMISSÃO CASO A OPÇÃO DE CIMA ESTEJA ATIVADA
+Config.VipPerm = "vip.permissao"															-- PERMISSÃO CASO A OPÇÃO DE CIMA ESTEJA ATIVADA OU DEIXAR (PREMIUM_SCRIPT) caso use função pronta da base (vRP.userPremium())
 
 
 Config.Lightson = true																		-- LIGAR AS LUZES DO CARRO EM EXPOSIÇÃO
@@ -41,7 +48,7 @@ Config.Wheels = {																			-- ROLETAS A SEREM SPAWNADAS
 
 
 
-Config.debug = true																			-- DEIXAR DESATIVADO (PERMITE ROLETAR SEM NECESSIDADE DO TEMPO)
+Config.debug = true																		-- DEIXAR DESATIVADO (PERMITE ROLETAR SEM NECESSIDADE DO TEMPO)
 Config.Tempo_reset = {h = 0, m = 10, s = 0}													-- TEMPO EM QUE IRÁ DEMORAR PARA CONSEGUIR ROLETAR NOVAMENTE (MAXIMO DE 24 HORAS!)
 			
 
@@ -52,7 +59,7 @@ Config.Cars = {																				-- POSSIVEIS CARROS A FICAR EM EXPOSIÇÃO (S
 }
 
 --TIPOS DE PREMIOS: (carro,item,colete,nada,dinheiro,vida,mistery)
---TIPOS DE ITEMS: Caso o type for "carro", deixar items = false; Caso o type for "item", deixar items com o nome do item a ser dado; Caso o type for "nada" ou "colete" ou "vida" deixar items = ""; caso type = dinheiro e utilizar o dinheiro como um item em sua base, deixar items com n ome do item de dinheiro, caso contrario, deixar false;
+--TIPOS DE ITEMS: Caso o type for "carro", deixar items = false caso queira que o carro a ser dado seja o da exposição, caso contrário, deixar o nome do carro a ser dado ou uma lista com sorteio de carros, exemplo: {"panto","neon","zentorno"}; Caso o type for "item", deixar items com o nome do item a ser dado; Caso o type for "nada" ou "colete" ou "vida" deixar items = ""; caso type = dinheiro e utilizar o dinheiro como um item em sua base, deixar items com n ome do item de dinheiro, caso contrario, deixar false;
 --TIPOS DE QUANTIDADE: A quantidade pode ser um valor fixo, ou um valor á ser sorteado, basta colocar {} e colocar o valor minimo e maximo á ser sorteado, EXP: {1,5}, irá sortear um valor entre 1 e 5, pode ser utilizado para qualquer tipo de prêmio
 --TIPOS DE SOUND: (car,cash,chips,clotches,mistery); é o som a ser feito ao ganhar um prêmio
 --TIPOS DE CHANCE: O script irá sortear um numero de 1 á 1000; caso a chance esteja entre o valor minimo (a) e o valor maximo (b), então o item é escolhido; 
@@ -64,7 +71,7 @@ Config.premios = {
 	[3]  = {type = 'colete', 	items = "", 						quantidade = 100, 			sound = 'clothes', 	chance = {a = 20, b = 80}		}, 	-- 6% de chance
 	[4]  = {type = 'nada', 		items = "",							quantidade = 1, 			sound = 'chips', 	chance = {a = 80, b = 110}		},
 	[5]  = {type = 'dinheiro', 	items = false, 						quantidade = 40000, 		sound = 'cash', 	chance = {a = 110, b = 150}		},
-	[6]  = {type = 'item', 		items = "mochila", 					quantidade = 1, 			sound = 'cash', 		chance = {a = 150, b = 200}	},	
+	[6]  = {type = 'item', 		items = "mochila", 					quantidade = 1, 			sound = 'cash', 	chance = {a = 150, b = 200}	},	
 	[7]  = {type = 'colete', 	items = "",							quantidade = 100, 			sound = 'clothes', 	chance = {a = 200, b = 300}		},	
 	[8]  = {
 		type = 'mistery', 	
