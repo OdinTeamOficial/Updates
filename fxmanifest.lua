@@ -1,20 +1,25 @@
-fx_version 'cerulean'
+fx_version 'adamant'
 game 'gta5'
+description 'Wheel_fortune'
+version '1.5'
 
-author 'OdinTeam'
-contact 'Discord: https://discord.gg/p9vq7U2qTe'
-version '2.4'
-
-
-client_scripts {
-    "@vrp/lib/utils.lua",
-    "config.lua",
-    "client.lua"
-}
 
 server_scripts {
 	"@vrp/lib/utils.lua",
-	"config.lua",
-	"checkversion.lua",
-	"server.lua"
+	'checkversion.lua',
+	'config.lua',
+    'language.lua',
+	'server.lua'
+}
+
+client_scripts {
+	"@vrp/lib/utils.lua",
+	'config.lua',
+    'language.lua',
+	'client.lua',
+}
+
+files {
+	"images/prop_luckywheel_01a_d2.png",
+	"images/prop_luckywheel_decal_dprop_luckywheel_decal_a.png"
 }
