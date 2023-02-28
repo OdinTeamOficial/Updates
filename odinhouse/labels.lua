@@ -135,12 +135,12 @@ local labels = {
 
     ['CreationComplete']    = "Casa criada com sucesso.",
 
-    ['HousePurchased'] = "Sua casa foi comprada por $%d",
+    ['HousePurchased'] = "Sua casa foi comprada por R$%d",
     ['HouseEarning']   = ", Voce recebeu $%d da venda.",
     ['Availableupgrades']   = "Upgrades Disponiveis",
     ['Upgradesdispo']   = "Upgrades",
     ['HouseExit']   = "Saida da Casa",
-    ['HouseSelling']   = "Casa à Venda",
+    ['HouseSelling']   = "Casa à Venda por R$",
     ['NoplayersNerHouse']   = "Sem jogadores na entrada",
     ['Confirmationhouse']   = "Confirmar",
     ['ConfirmationSalehouse']   = "Confirmar Vend",
