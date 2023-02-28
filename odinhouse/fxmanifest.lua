@@ -1,7 +1,7 @@
 fx_version 'adamant'
 games { 'rdr3', 'gta5' }
 mod 'OdinHouse'
-version '1.2'
+version '1.3'
 
 ui_page "nui/index.html"
 
@@ -57,5 +57,3 @@ dependencies {
   'meta_libs',
   "GHMattiMySQL",
 }
-
-
