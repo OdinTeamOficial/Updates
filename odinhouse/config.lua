@@ -38,6 +38,7 @@ Config = {
   BlipCasaVazia   = 350,                                  -- Tipo de blip casa vazia
   BlipDonoCasa   = 40,                                    -- Tipo de blip dono da casa
   BlipCasaComprada   = 357,                               -- Tipo de blip de outras casas
+  BlipScala   = 0.5,                                      -- Scala de blip de outras casas
   BlipPorZona   = {                                       -- Blip por zona
     [9] = {                                               -- Entre [] fica o id da casa a ter configuração diferente
       BlipCasaVaziaZona  = 350,                           -- Tipo de blip casa vazia
