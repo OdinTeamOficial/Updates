@@ -1,7 +1,7 @@
 fx_version 'adamant'
 games { 'rdr3', 'gta5' }
 mod 'OdinHouse'
-version '1.4'
+version '1.6'
 
 ui_page "nui/index.html"
 
