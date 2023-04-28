@@ -50,7 +50,7 @@ dependencies {
   'input',
   'interiors',
   'meta_libs',
-  "ghmattimysql",
+
 }
 
 
