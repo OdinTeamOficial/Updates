@@ -1,43 +1,29 @@
-<!doctype html>
-<html lang="en">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>#creative</title>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link href="css/css.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div class="inventory">
+			<div class="innerInventory">
+				<div id="weight">
+					<div id="weightTextLeft"></div>
+					<div id="weightTextRight"></div>
+					<div id="weightBarLeft"></div>
+					<div id="weightBarRight"></div>
+				</div>
 
-
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  <script src="https://kit.fontawesome.com/d5821cdbca.js"></script>
-
-  <title>Inventário Fodaski</title>
-</head>
-
-<body>
-  <div class="inventory-mask">
-    <div class="col-12 inventory-content">
-      <div class="row col-md-12 workspace">
-        <div class="col-md-6 bag-workspace">
-          <div class="col-12 title-section inventory-title">Inventário <small><i>carregando...</i></small></div>
-          <div class="row objects" data-target="inventory"></div>
-        </div>
-        <div class="col-md-6 trunk-workspace">
-          <div class="col-12 title-section inventory-title">Baú da casa <small><i>carregando...</i></small></div>
-          <div class="row objects" data-target="inventory"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-</body>
-
-<script src="js/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script src="js/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
-<script src="js/ui.js"></script>
-
-</html>
+				<div class="sections">
+					<div id="invleft"></div>
+					<div class="invmiddle">
+						<input class="amount" type="number" placeholder="QTD" />
+					</div>
+					<div id="invright"></div>
+				</div>
+			</div>
+			<script src="js/jquery.js" type="text/javascript"></script>
+		</body>
+	</html>

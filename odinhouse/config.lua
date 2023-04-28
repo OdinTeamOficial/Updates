@@ -1,8 +1,9 @@
 Config = {
   Linguagem      = 'pt',                                  -- Linguagem a ser utilizada 
   Debug       = false,                                    -- Não mexer
-  Max_Homes = 2,                                          -- Limite de casas por players
-  Command_create = "vali1234",                            -- Comando para criar casas
+  Max_Homes = 4,                                          -- Limite de casas por players
+  Command_create = "criarcasa",                            -- Comando para criar casas
+  Framework = "creative_complex",
   Command_delete = "delhouse",                            -- Comando para deletar casas
   PermitirVendaDeCasas = true,                            -- Permitir players vender casa
   SpawnOffset     = vector3(0.0,0.0,0.0),                 -- Offset de spawn 
@@ -12,6 +13,11 @@ Config = {
   SaveVehicleFuel = true,                                 -- Salvar combustivel do veiculo
   SaveVehicleEngine = true,                               -- Savar dano do motor do veiculo 
   UsarVSync        = true,                                -- Usando vsync
+  BlipPorComando    = true,                                -- Mostrar BLips Somente Por comando
+  ComandoVerBlips = "casas",                               -- Comando Para Ver Blips
+  TempoAparecerblip = 30000,                               -- Tempo Para Aparecer Blips (ms)
+
+
   UsingNativeUI     = true,                               -- Não mexer
   UsarInventarioNasCasas = true,                          -- Permitir inventario nas casas
   UsarHelpText       = true,                              -- Usar heelp text
@@ -85,8 +91,8 @@ Config = {
   QuebrarLockpickFalha       = true,                     -- Quebrar lockpick ao falhar
   ChanceDeFalhar        = 50,                            -- Chance de falhar
   TempoLockpick              = 3,                        -- Tempo para roubar 
-  PermiAdmin = "admin.permissao",                        -- Permissão de admin
-  PermiPolicia = "policia.permissao",                    -- Permissão de policias
+  PermiAdmin = "Admin",                                  -- Permissão de admin
+  PermiPolicia = "Police",                               -- Permissão de policias
   PoliciaisPodemEntrar     = true,                       -- Permitir policiais entrar em casas 
   PoliciaAcessarInv  = true,                             -- Permitir policiais acessar inventario
 }

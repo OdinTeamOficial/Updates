@@ -24,7 +24,6 @@ client_scripts {
 
 server_scripts {
   "@vrp/lib/utils.lua",
-  '@mysql-async/lib/MySQL.lua',
   'src/server/vrp.lua',
   'config.lua',
   'checkversion.lua',
@@ -41,12 +40,8 @@ server_scripts {
 
 files {
   "nui/index.html",
-	"nui/css/bootstrap.min.css",
-	"nui/css/jquery-ui.css",
-	"nui/css/style.css",
-	"nui/js/jquery-2.2.4.min.js",
-	"nui/js/jquery-ui.min.js",
-	"nui/js/ui.js",
+	"nui/css/*.css",
+	"nui/js/*.js",
 	"nui/images/*.png"
 }
 
@@ -55,5 +50,7 @@ dependencies {
   'input',
   'interiors',
   'meta_libs',
-  "GHMattiMySQL",
+  "ghmattimysql",
 }
+
+

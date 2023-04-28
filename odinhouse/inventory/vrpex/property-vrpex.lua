@@ -12,7 +12,7 @@ vSERVER = Tunnel.getInterface("AllHousing")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIAVEIS
 -----------------------------------------------------------------------------------------------------------------------------------------
-
+local houseTimer = 0
 local houseOpen = ""
 local bau_space = 100
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -21,12 +21,11 @@ local bau_space = 100
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
 end)
-
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CHESTCLOSE
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("chestClose",function(data)
-	vSERVER.chestClose()
+	TriggerEvent("vrp_sound:source",'zipperclose',0.2)
 	SetNuiFocus(false,false)
 	SendNUIMessage({ action = "hideMenu" })
 end)
@@ -34,54 +33,38 @@ end)
 -- TAKEITEM
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("takeItem",function(data)
-	vSERVER.takeItem(tostring(houseOpen),data.item,data.slot,data.amount)
+	vSERVER.takeItem(tostring(houseOpen),data.item,data.amount)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- STOREITEM
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("storeItem",function(data)
-	vSERVER.storeItem(tostring(houseOpen),data.item,data.slot,data.amount,bau_space)
+	vSERVER.storeItem(tostring(houseOpen),data.item,data.amount,tonumber(bau_space))
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- POPULATESLOT
+-- AUTO-UPDATE
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNUICallback("populateSlot",function(data,cb)
-	TriggerServerEvent("homes:populateSlot",data.item,data.slot,data.target,data.amount)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- UPDATESLOT
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNUICallback("updateSlot",function(data,cb)
-	TriggerServerEvent("homes:updateSlot",data.item,data.slot,data.target,data.amount)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- UPDATESLOT
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNUICallback("sumSlot",function(data,cb)
-	TriggerServerEvent("homes:sumSlot",data.item,data.slot,data.amount)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- homes:UPDATE
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("homes:Update")
-AddEventHandler("homes:Update",function(action)
+RegisterNetEvent("Creative:UpdateVault")
+AddEventHandler("Creative:UpdateVault",function(action)
 	SendNUIMessage({ action = action })
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REQUESTVAULT
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestVault",function(data,cb)
-	local inventario,inventario2,peso,maxpeso,peso2,maxpeso2,infos = vSERVER.openChest(tostring(houseOpen),bau_space)
+
+	local inventario,inventario2,peso,maxpeso,peso2 = vSERVER.openChest(tostring(houseOpen))
 	if inventario then
-		cb({ inventario = inventario, inventario2 = inventario2, peso = peso, maxpeso = maxpeso, peso2 = peso2, maxpeso2 = bau_space, infos = infos })
+		cb({ inventario = inventario, inventario2 = inventario2, peso = peso, maxpeso = maxpeso, peso2 = peso2, maxpeso2 = bau_space })
 	end
 end)
 
 function openinventoryhouse(table)
-
-	SetNuiFocus(true,true)
-	SendNUIMessage({ action = "showMenu" })
-	TriggerEvent("sounds:source","chest",0.7)
+    houseTimer = 3
+    TriggerEvent("vrp_sound:source","zipperopen",0.5)
+    SetNuiFocus(true,true)
+    SendNUIMessage({ action = "showMenu" })
     houseOpen = tostring(table.Id)
+
 	bau_space = tonumber(table.Bau)
 end

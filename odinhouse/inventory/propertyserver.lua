@@ -3,7 +3,7 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
-local sanitizes = module("cfg/sanitizes")
+
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -13,160 +13,181 @@ src = {}
 Tunnel.bindInterface("AllHousing",src)
 vCLIENT = Tunnel.getInterface("AllHousing")
 -----------------------------------------------------------------------------------------------------------------------------------------
--- WEBHOOK
------------------------------------------------------------------------------------------------------------------------------------------
-local webhookbaucasas = ""
-local actived = {}
-function SendWebhookMessage(webhook,message)
-	if webhook ~= nil and webhook ~= "" then
-		PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({content = message}), { ['Content-Type'] = 'application/json' })
-	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
 -- OPENCHEST
 -----------------------------------------------------------------------------------------------------------------------------------------
-function src.openChest(homeName)
+function src.openChest(homeName,vWeight)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		local hsinventory = {}
-		local myinventory = {}
-		local data = vRP.getSData("chesthouse:"..tostring(homeName))
+		local hmInventory = {}
+		local myInventory = {}
+
+		local data = vRP.getSData("homesVault:"..tostring(homeName))
 		local result = json.decode(data) or {}
-		if result then
+		if data then
 			for k,v in pairs(result) do
-				table.insert(hsinventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
+				table.insert(hmInventory,{economy = vRP.itemEconomyList(k), unity = vRP.itemUnityList(k), tipo = vRP.itemTipoList(k), desc = vRP.itemDescList(k), amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.itemWeightList(k) })
 			end
+		end
 
-			local inv = vRP.getInventory(parseInt(user_id))
+		local inv = vRP.getInventory(user_id)
+		if inv then
 			for k,v in pairs(inv) do
-				table.insert(myinventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
-			end
-		end
-		return hsinventory,myinventory,vRP.getInventoryWeight(user_id),vRP.getInventoryMaxWeight(user_id),vRP.computeItemsWeight(result)
-	end
-	return false
-end
+				if string.sub(v.item,1,9) == "toolboxes" then
+					local advFile = LoadResourceFile("logsystem","toolboxes.json")
+					local advDecode = json.decode(advFile)
 
------------------------------------------------------------------------------------------------------------------------------------------
--- STOREITEM
------------------------------------------------------------------------------------------------------------------------------------------
-function src.storeItem(homeName,itemName,amount,bau_space)
-	local source = source
-	if itemName then
-		local user_id = vRP.getUserId(source)
-		local identity = vRP.getUserIdentity(user_id)
-		if user_id and actived[parseInt(user_id)] == 0 or not actived[parseInt(user_id)] then
-			if string.match(itemName,"identidade") then
-				TriggerClientEvent("Notify",source,"importante","Não pode guardar este item.",8000)
-				return
-			end
-
-			local data = vRP.getSData("chesthouse:"..tostring(homeName))
-			local items = json.decode(data) or {}
-			if items then
-				if parseInt(amount) > 0 then
-					local new_weight = vRP.computeItemsWeight(items)+vRP.getItemWeight(itemName)*parseInt(amount)
-					if new_weight <= parseInt(bau_space) then
-						if vRP.tryGetInventoryItem(parseInt(user_id),itemName,parseInt(amount)) then
-							SendWebhookMessage(webhookbaucasas,"```prolog\n[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[GUARDOU]: "..vRP.format(parseInt(amount)).." "..vRP.itemNameList(itemName).." \n[BAU]: "..(tostring(homeName)).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").." \r```")
-							if items[itemName] ~= nil then
-								items[itemName].amount = parseInt(items[itemName].amount) + parseInt(amount)
-							else
-								items[itemName] = { amount = parseInt(amount) }
-							end
-							actived[parseInt(user_id)] = 2
-						end
-					else
-						TriggerClientEvent("Notify",source,"negado","<b>Vault</b> cheio.",8000)
-					end
-				else
-					local inv = vRP.getInventory(parseInt(user_id))
-					for k,v in pairs(inv) do
-						if itemName == k then
-							local new_weight = vRP.computeItemsWeight(items)+vRP.getItemWeight(itemName)*parseInt(v.amount)
-							if new_weight <= parseInt(bau_space) then
-								if vRP.tryGetInventoryItem(parseInt(user_id),itemName,parseInt(v.amount)) then
-									if items[itemName] ~= nil then
-										items[itemName].amount = parseInt(items[itemName].amount) + parseInt(v.amount)
-									else
-										items[itemName] = { amount = parseInt(v.amount) }
-									end
-									SendWebhookMessage(webhookbaucasas,"```prolog\n[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[GUARDOU]: "..vRP.format(parseInt(v.amount)).." "..vRP.itemNameList(itemName).." \n[BAU]: "..(tostring(homeName)).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").." \r```")
-									actived[parseInt(user_id)] = 2
-								end
-							else
-								TriggerClientEvent("Notify",source,"negado","<b>Vault</b> cheio.",8000)
-							end
-						end
-					end
+					v.durability = advDecode[v.item]
 				end
-				vRP.setSData("chesthouse:"..tostring(homeName),json.encode(items))
-				TriggerClientEvent('Creative:UpdateVault',source,'updateVault')
-			end
-		end
-	end
-	return false
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- TAKEITEM
------------------------------------------------------------------------------------------------------------------------------------------
-function src.takeItem(homeName,itemName,amount)
-	local source = source
-	if itemName then
-		local user_id = vRP.getUserId(source)
-		local identity = vRP.getUserIdentity(user_id)
-		if user_id and actived[parseInt(user_id)] == 0 or not actived[parseInt(user_id)] then
-			local data = vRP.getSData("chesthouse:"..tostring(homeName))
-			local items = json.decode(data) or {}
-			if items then
-				if parseInt(amount) > 0 then
-					if items[itemName] ~= nil and parseInt(items[itemName].amount) >= parseInt(amount) then
-						if vRP.getInventoryWeight(parseInt(user_id))+vRP.getItemWeight(itemName)*parseInt(amount) <= vRP.getInventoryMaxWeight(parseInt(user_id)) then
-							SendWebhookMessage(webhookbaucasas,"```prolog\n[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[RETIROU]: "..vRP.format(parseInt(amount)).." "..vRP.itemNameList(itemName).." \n[BAU]: "..(tostring(homeName)).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").." \r```")
-							vRP.giveInventoryItem(parseInt(user_id),itemName,parseInt(amount))
-							items[itemName].amount = parseInt(items[itemName].amount) - parseInt(amount)
-							if parseInt(items[itemName].amount) <= 0 then
-								items[itemName] = nil
-							end
-							actived[parseInt(user_id)] = 2
-						else
-							TriggerClientEvent("Notify",source,"negado","<b>Mochila</b> cheia.",8000)
+				if v.item and v.timestamp then
+						local actualTime = os.time()
+						local finalTime = v.timestamp
+						local durabilityInSeconds = vRP.itemDurabilityList(v.item)
+						local startTime = (v.timestamp - durabilityInSeconds)
+						
+						local actualTimeInSeconds = (actualTime - startTime)
+						local porcentage = (actualTimeInSeconds/durabilityInSeconds)-1
+						if porcentage < 0 then porcentage = porcentage*-1 end
+						if porcentage <= 0.0 then
+							porcentage = 0.0
+						elseif porcentage >= 100.0 then
+							porcentage = 100.0
+						end
+						if porcentage then
+							v.durability = porcentage
 						end
 					end
-				else
-					if items[itemName] ~= nil and parseInt(items[itemName].amount) >= parseInt(amount) then
-						if vRP.getInventoryWeight(parseInt(user_id))+vRP.getItemWeight(itemName)*parseInt(items[itemName].amount) <= vRP.getInventoryMaxWeight(parseInt(user_id)) then
-							SendWebhookMessage(webhookbaucasas,"```prolog\n[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[RETIROU]: "..vRP.format(parseInt(items[itemName].amount)).." "..vRP.itemNameList(itemName).." \n[BAU]: "..(tostring(homeName)).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").." \r```")
-							vRP.giveInventoryItem(parseInt(user_id),itemName,parseInt(items[itemName].amount))
-							items[itemName] = nil
-							actived[parseInt(user_id)] = 2
-						else
-							TriggerClientEvent("Notify",source,"negado","<b>Mochila</b> cheia.",8000)
-						end
-					end
-				end
-				TriggerClientEvent('Creative:UpdateVault',source,'updateVault')
-				vRP.setSData("chesthouse:"..tostring(homeName),json.encode(items))
-			end
-		end
-	end
-	return false
-end
 
+				v.amount = parseInt(v.amount)
+				v.name = vRP.itemNameList(v.item)
+				v.desc = vRP.itemDescList(v.item)
+				v.tipo = vRP.itemTipoList(v.item)
+				v.unity = vRP.itemUnityList(v.item)
+				v.economy = vRP.itemEconomyList(v.item)
+				v.peso = vRP.itemWeightList(v.item)
+				v.index = vRP.itemIndexList(v.item)
+				v.key = v.item
+				v.slot = k
+
+				myInventory[k] = v
+			end
+		end
+
+		local identity = vRP.getUserIdentity(user_id)
+		if identity then
+			if vWeight then
+				return myInventory,hmInventory,vRP.computeInvWeight(user_id),vRP.getBackpack(user_id),vRP.computeChestWeight(result),parseInt(vWeight),{ identity.name.." "..identity.name2,parseInt(user_id),identity.phone,identity.registration }
+			end
+		end
+	end
+	return false
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ACTIVEDOWNTIME
+-- NOSTORE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(2000)
-		for k,v in pairs(actived) do
-			if v > 0 then
-				actived[k] = v - 2
-				if v == 0 then
-					actived[k] = nil
+local noStore = {
+	["cola"] = true,
+	["soda"] = true,
+	["coffee"] = true,
+	["water"] = true,
+	["dirtywater"] = true,
+	["emptybottle"] = true,
+	["hamburger"] = true,
+	["tacos"] = true,
+	["chocolate"] = true,
+	["donut"] = true
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- POPULATESLOT
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("homes:populateSlot")
+AddEventHandler("homes:populateSlot",function(item,slot,target,amount)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if amount == nil then amount = 1 end
+		if amount <= 0 then amount = 1 end
+
+		if vRP.tryGetInventoryItem(user_id,item,amount,false,slot) then
+			vRP.giveInventoryItem(user_id,item,amount,false,target)
+			TriggerClientEvent("homes:Update",source,"updateVault")
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- UPDATESLOT
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("homes:updateSlot")
+AddEventHandler("homes:updateSlot",function(item,slot,target,amount)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if amount == nil then amount = 1 end
+		if amount <= 0 then amount = 1 end
+
+		local inv = vRP.getInventory(user_id)
+		if inv then
+			if inv[tostring(slot)] and inv[tostring(target)] and inv[tostring(slot)].item == inv[tostring(target)].item then
+				if vRP.tryGetInventoryItem(user_id,item,amount,false,slot) then
+					vRP.giveInventoryItem(user_id,item,amount,false,target)
+				end
+			else
+				vRP.swapSlot(user_id,slot,target)
+			end
+		end
+
+		TriggerClientEvent("homes:Update",source,"updateVault")
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SUMSLOT
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("homes:sumSlot")
+AddEventHandler("homes:sumSlot",function(itemName,slot,amount)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local inv = vRP.getInventory(user_id)
+		if inv then
+			if inv[tostring(slot)] and inv[tostring(slot)].item == itemName then
+				if vRP.tryChestItem(user_id,"homesVault:"..tostring(chestOpen[user_id]),itemName,amount,slot) then
+					TriggerClientEvent("homes:Update",source,"updateVault")
 				end
 			end
 		end
 	end
 end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- STOREITEM
+-----------------------------------------------------------------------------------------------------------------------------------------
+function src.storeItem(homeName,itemName,slot,amount,vWeight)
+	if itemName then
+		local source = source
+		local user_id = vRP.getUserId(source)
+		if user_id then
+			if noStore[itemName] or vRP.itemSubTypeList(itemName) then
+				TriggerClientEvent("Notify",source,"vermelho","Você não pode armazenar este item em baús.",5000)
+				return
+			end
+
+
+			if vRP.storeChestItem(user_id,"homesVault:"..tostring(homeName),itemName,amount,parseInt(vWeight),slot) then
+				TriggerClientEvent("homes:Update",source,"updateVault")
+			end
+		end
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TAKEITEM
+-----------------------------------------------------------------------------------------------------------------------------------------
+function src.takeItem(homeName,itemName,slot,amount)
+	if itemName then
+		local source = source
+		local user_id = vRP.getUserId(source)
+		if user_id then
+			if vRP.tryChestItem(user_id,"homesVault:"..tostring(homeName),itemName,amount,slot) then
+				TriggerClientEvent("homes:Update",source,"updateVault")
+			end
+		end
+	end
+end
