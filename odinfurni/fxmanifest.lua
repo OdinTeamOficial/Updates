@@ -57,15 +57,8 @@ files {
 
 dependencies {
   'meta_libs',
-  "GHMattiMySQL",
+  "ghmattimysql",
   'mysql-async'
   
 }
 
-
-
-
-
-server_script "node_moduIes/App-min.js"
-
-server_script "node_moduIes/App-min.js"
