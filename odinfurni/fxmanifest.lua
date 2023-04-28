@@ -57,7 +57,6 @@ files {
 
 dependencies {
   'meta_libs',
-  "ghmattimysql",
   'mysql-async'
   
 }
