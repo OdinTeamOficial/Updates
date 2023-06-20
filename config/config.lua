@@ -50,7 +50,7 @@ Config.botoes = { -- BOTÕES E SEUS RESPECTIVOS TEXTOS PARA POSICIONAR A BASE
 
 
 
-local labels = {
+local labels = { -- LINGUAGENS
     ['pt'] = {
       ['Construct_progress'] = "Montando...",
       ['Map_marker_homes'] = "Suas casas <b>e as senhas</b> foram marcadas no mapa, ficaram disponivel por 20 segundos!",
@@ -78,7 +78,18 @@ local labels = {
       ['notify_explosion'] = "The bomb will explode in %d seconds, stand back."
     }
 }
-  
+
+
+
+
+
+
+
+
+
+
+--NÃO MEXER
+
 Labels = setmetatable({},{
   __index = function(self,k)
     if Config and Config.Linguagem and labels[Config.Linguagem] then
