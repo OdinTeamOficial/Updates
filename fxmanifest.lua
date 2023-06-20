@@ -15,7 +15,7 @@ client_scripts {
 
 server_scripts {
 	"@vrp/lib/utils.lua",
-	"checkversion.lua"
+	"checkversion.lua",
 	"config/config.lua",
 	"config/config_server.lua",
 	"server/server_homes.lua",
