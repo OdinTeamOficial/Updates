@@ -1,10 +1,7 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VRP
 -----------------------------------------------------------------------------------------------------------------------------------------
-local Tunnel = module("vrp","lib/Tunnel")
-local Proxy = module("vrp","lib/Proxy")
 
-vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CONEXÃO
@@ -27,7 +24,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 function src.openChest(homeName)
 	local source = source
-	local user_id = vRP.getUserId(source)
+	local user_id = fodaSKI.getuserid(source)
 	if user_id then
 		local hsinventory = {}
 		local myinventory = {}
@@ -54,8 +51,8 @@ end
 function src.storeItem(homeName,itemName,amount,bau_space)
 	local source = source
 	if itemName then
-		local user_id = vRP.getUserId(source)
-		local identity = vRP.getUserIdentity(user_id)
+		local user_id = fodaSKI.getuserid(source)
+		local identity = fodaSKI.getidentity(user_id)
 		if user_id and actived[parseInt(user_id)] == 0 or not actived[parseInt(user_id)] then
 			if string.match(itemName,"identidade") then
 				TriggerClientEvent("Notify",source,"importante","Não pode guardar este item.",8000)
@@ -114,8 +111,8 @@ end
 function src.takeItem(homeName,itemName,amount)
 	local source = source
 	if itemName then
-		local user_id = vRP.getUserId(source)
-		local identity = vRP.getUserIdentity(user_id)
+		local user_id = fodaSKI.getuserid(source)
+		local identity = fodaSKI.getidentity(user_id)
 		if user_id and actived[parseInt(user_id)] == 0 or not actived[parseInt(user_id)] then
 			local data = vRP.getSData("chesthouse:"..tostring(homeName))
 			local items = json.decode(data) or {}

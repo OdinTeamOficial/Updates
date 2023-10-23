@@ -4,7 +4,7 @@
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 
-vRP = Proxy.getInterface("vRP")
+
 vRPclient = Tunnel.getInterface("vRP")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CONEXÃO
@@ -17,7 +17,7 @@ vCLIENT = Tunnel.getInterface("AllHousing")
 -----------------------------------------------------------------------------------------------------------------------------------------
 function src.openChest(homeName,vWeight)
 	local source = source
-	local user_id = vRP.getUserId(source)
+	local user_id = fodaSKI.getuserid(source)
 	if user_id then
 		local hmInventory = {}
 		local myInventory = {}
@@ -73,7 +73,7 @@ function src.openChest(homeName,vWeight)
 			end
 		end
 
-		local identity = vRP.getUserIdentity(user_id)
+		local identity = fodaSKI.getidentity(user_id)
 		if identity then
 			if vWeight then
 				return myInventory,hmInventory,vRP.computeInvWeight(user_id),vRP.getBackpack(user_id),vRP.computeChestWeight(result),parseInt(vWeight),{ identity.name.." "..identity.name2,parseInt(user_id),identity.phone,identity.registration }
@@ -103,7 +103,7 @@ local noStore = {
 RegisterNetEvent("homes:populateSlot")
 AddEventHandler("homes:populateSlot",function(item,slot,target,amount)
 	local source = source
-	local user_id = vRP.getUserId(source)
+	local user_id = fodaSKI.getuserid(source)
 	if user_id then
 		if amount == nil then amount = 1 end
 		if amount <= 0 then amount = 1 end
@@ -120,7 +120,7 @@ end)
 RegisterNetEvent("homes:updateSlot")
 AddEventHandler("homes:updateSlot",function(item,slot,target,amount)
 	local source = source
-	local user_id = vRP.getUserId(source)
+	local user_id = fodaSKI.getuserid(source)
 	if user_id then
 		if amount == nil then amount = 1 end
 		if amount <= 0 then amount = 1 end
@@ -145,7 +145,7 @@ end)
 RegisterNetEvent("homes:sumSlot")
 AddEventHandler("homes:sumSlot",function(itemName,slot,amount)
 	local source = source
-	local user_id = vRP.getUserId(source)
+	local user_id = fodaSKI.getuserid(source)
 	if user_id then
 		local inv = vRP.getInventory(user_id)
 		if inv then
@@ -163,7 +163,7 @@ end)
 function src.storeItem(homeName,itemName,slot,amount,vWeight)
 	if itemName then
 		local source = source
-		local user_id = vRP.getUserId(source)
+		local user_id = fodaSKI.getuserid(source)
 		if user_id then
 			if noStore[itemName] or vRP.itemSubTypeList(itemName) then
 				TriggerClientEvent("Notify",source,"vermelho","Você não pode armazenar este item em baús.",5000)
@@ -183,7 +183,7 @@ end
 function src.takeItem(homeName,itemName,slot,amount)
 	if itemName then
 		local source = source
-		local user_id = vRP.getUserId(source)
+		local user_id = fodaSKI.getuserid(source)
 		if user_id then
 			if vRP.tryChestItem(user_id,"homesVault:"..tostring(homeName),itemName,amount,slot) then
 				TriggerClientEvent("homes:Update",source,"updateVault")

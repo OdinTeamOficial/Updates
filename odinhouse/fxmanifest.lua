@@ -30,7 +30,6 @@ server_scripts {
   'houses.lua',  
   'labels.lua', 
   'src/utils.lua',
-  'src/server/server.lua',
   'src/server/framework/framework_functions.lua',
   'src/server/functions.lua',
   'inventory/propertyserver.lua',

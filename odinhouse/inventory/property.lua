@@ -2,9 +2,7 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VRP
 -----------------------------------------------------------------------------------------------------------------------------------------
-local Tunnel = module("vrp","lib/Tunnel")
-local Proxy = module("vrp","lib/Proxy")
-vRP = Proxy.getInterface("vRP")
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CONEXÃO
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -78,10 +76,11 @@ RegisterNUICallback("requestVault",function(data,cb)
 end)
 
 function openinventoryhouse(table)
-
-	SetNuiFocus(true,true)
-	SendNUIMessage({ action = "showMenu" })
-	TriggerEvent("sounds:source","chest",0.7)
-    houseOpen = tostring(table.Id)
+	local coords = GetEntityCoords(PlayerPedId())
+	local table_cords = {coords.x,coords.y,coords.z}
+	houseOpen = tostring("Casa"..table.Id)
 	bau_space = tonumber(table.Bau)
+	TriggerEvent("sounds:source","chest",0.7)
+	TriggerEvent('dope:nuis:abririnventario',table_cords,houseOpen,bau_space)
+
 end
